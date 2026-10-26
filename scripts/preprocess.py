@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append('..')
+
 import cc_tmcn.preprocessing.padding as padding
 from pathlib import Path
 import argparse
