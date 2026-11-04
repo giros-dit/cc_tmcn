@@ -1,0 +1,6 @@
+__pycache__/
+build/
+CC_TMCM.egg-info/
+env/
+output/
+sftp_config.py

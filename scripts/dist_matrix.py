@@ -9,6 +9,8 @@ from sklearn.neighbors import kneighbors_graph
 from scipy.sparse.csgraph import shortest_path
 import time
 
+from fsspec_sftp import fs
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--data-path', required=True, type=str, metavar='PATH',
 						help='Path to input data')
@@ -19,7 +21,9 @@ parser.add_argument('--output-path', required=True, type=str,
 if __name__ == "__main__":
     args = parser.parse_args()
 
-    data = pd.read_pickle(Path(args.data_path))
+    #data = pd.read_pickle(Path(args.data_path))
+    
+    data = pd.read_pickle(fs.open(args.data_path, "rb"))
 
     # Vectorize input data
     data_flat = data[0].reshape((data[0].shape[0], data[0].shape[1]*data[0].shape[2]))

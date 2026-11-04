@@ -3,6 +3,8 @@ import pickle
 from pathlib import Path
 import argparse
 
+from fsspec_sftp import fs
+
 ap = argparse.ArgumentParser()
 ap.add_argument("--data-path", required=True, help="Path to the training data folder, with the distance matrix")
 ap.add_argument("--model-name", required=True, help="Name of the model")
@@ -16,6 +18,8 @@ if __name__ == "__main__":
     model_path = args.model_path
 
     training_data = pickle.load(open(data_path / Path("training_data"), "rb"))
+    #training_data = pickle.load(fs.open(data_path / Path("training_data"), "rb"))
+    
     model = model_factory.create_model(args.model_name, model_path)
 
     model.train(training_data)

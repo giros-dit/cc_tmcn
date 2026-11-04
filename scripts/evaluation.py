@@ -10,6 +10,8 @@ import numpy as np
 from matplotlib.ticker import FormatStrFormatter
 from sklearn.manifold import trustworthiness
 
+from fsspec_sftp import fs
+
 def least_squares_transform(cc_data, pos_data):
 
     # Pad the data with ones, so that our transformation can do translations too
@@ -74,7 +76,10 @@ if __name__ == "__main__":
     data_path = args.data_path
     model_path = args.model_path
 
-    training_data = list(pickle.load(open(data_path, "rb")))
+    # Load the training data
+    #training_data = list(pickle.load(open(data_path, "rb")))
+    
+    training_data = list(pickle.load(fs.open(data_path, "rb")))
 
     model = model_factory.load_model(args.model_name, model_path)
     input_data = training_data[0]
