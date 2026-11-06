@@ -79,7 +79,7 @@ if __name__ == "__main__":
     # Load the training data
     #training_data = list(pickle.load(open(data_path, "rb")))
     
-    training_data = list(pickle.load(fs.open(data_path, "rb")))
+    training_data = list(pickle.load(fs.fs.open(data_path, "rb")))
 
     model = model_factory.load_model(args.model_name, model_path)
     input_data = training_data[0]
